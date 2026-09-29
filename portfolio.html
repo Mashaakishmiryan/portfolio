@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maral Kishmiryan — Portfolio (Animated)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{--bg:#1a0a0d;--bg-deep:#120608;--bg-card:#261014;--wine:#7a2a35;--cream:#f0e4d8;--cream-soft:#d8c8ba;--cream-dim:#a89a8c;--rose:#c98a8a;--gold:#c9a86a;--ease:cubic-bezier(.22,1,.36,1)}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--cream);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden;cursor:none}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(122,42,53,.3),transparent 55%),radial-gradient(ellipse at 90% 100%,rgba(92,31,39,.35),transparent 60%);pointer-events:none;z-index:0}
+    h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.1}
+    p{color:var(--cream-soft);font-size:.95rem;max-width:70ch}
+    a{color:inherit;text-decoration:none;transition:.3s}
+    .container{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:2}
+    section{padding:4.5rem 0;position:relative}
+
+    /* ----- CURSOR & PROGRESS ----- */
+    .cursor-dot{position:fixed;width:6px;height:6px;background:var(--rose);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    .cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(201,138,138,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
+    .cursor-ring.hover{width:60px;height:60px;background:rgba(201,138,138,.08)}
+    .progress-bar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--rose),var(--gold));width:0;z-index:9999}
+
+    /* ----- TOP BAR ----- */
+    .topbar{display:flex;justify-content:space-between;padding:1.4rem 0;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--cream-dim);border-bottom:1px solid rgba(240,228,216,.1)}
+    .topbar .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;margin-right:.5rem;animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* ----- HERO ----- */
+    .hero{padding:3rem 0 4rem;overflow:hidden}
+    .hero-word{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,15vw,12rem);font-weight:500;line-height:.85;letter-spacing:-.04em;text-align:center;text-shadow:0 0 80px rgba(122,42,53,.5);margin-bottom:-1rem}
+    .hero-word span{display:inline-block;opacity:0;transform:translateY(80px) rotateX(-40deg);animation:letterDrop .8s var(--ease) forwards}
+    @keyframes letterDrop{to{opacity:1;transform:translateY(0) rotateX(0)}}
+    .hero-grid{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:2rem;align-items:center;margin-top:1.5rem}
+    .hero-left h2{font-size:clamp(1.2rem,2vw,1.9rem);text-transform:uppercase;letter-spacing:.02em;font-weight:500;margin-bottom:1rem}
+    .hero-left h2 em{font-family:'Great Vibes',cursive;font-style:normal;color:var(--rose);font-size:1.3em;display:block;margin-top:.2rem;text-transform:none;letter-spacing:0}
+    .type-line{font-size:.85rem;color:var(--rose);letter-spacing:.1em;margin-bottom:1.2rem;font-family:'Cormorant Garamond',serif;font-style:italic;min-height:1.4em}
+    .type-line::after{content:'|';animation:caret 1s infinite}
+    @keyframes caret{50%{opacity:0}}
+    .hero-btn{display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(240,228,216,.25);padding:.75rem 1.4rem;border-radius:40px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;background:transparent;cursor:none;font-family:'Inter',sans-serif;position:relative;overflow:hidden;transition:.4s}
+    .hero-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(201,138,138,.35),transparent);transition:left .6s}
+    .hero-btn:hover::before{left:100%}
+    .hero-btn:hover{background:var(--wine);border-color:var(--wine);transform:translateY(-3px)}
+
+    .portrait{display:flex;justify-content:center}
+    .portrait-frame{width:100%;max-width:300px;aspect-ratio:3/4;border-radius:180px 180px 16px 16px;overflow:hidden;border:1px solid rgba(240,228,216,.2);box-shadow:0 30px 80px rgba(0,0,0,.6);position:relative;animation:float 6s ease-in-out infinite;background:var(--bg-card)}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    .portrait-frame img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:.8s;display:block}
+    .portrait-frame:hover img{transform:scale(1.08)}
+    .portrait-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(26,10,13,.7));pointer-events:none}
+
+    .hero-right{text-align:right}
+    .hero-right p{font-size:.85rem;margin-left:auto;margin-bottom:1.5rem}
+    .hero-right .meta{display:flex;flex-direction:column;gap:.5rem;align-items:flex-end;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim)}
+    .hero-right .meta i{color:var(--rose);margin-right:.5rem}
+    .signature{font-family:'Great Vibes',cursive;font-size:2rem;color:var(--rose);margin-top:1rem;opacity:0;animation:fadeIn 1s ease 1.2s forwards}
+    @keyframes fadeIn{to{opacity:1}}
+
+    /* ----- HEADERS ----- */
+    .head{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:1px solid rgba(240,228,216,.1);margin-bottom:2.5rem}
+    .head h3{font-family:'Inter',sans-serif;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;font-weight:500;display:flex;align-items:center;gap:.6rem}
+    .head h3::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s infinite}
+    .head span{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-dim)}
+
+    /* ----- REVEAL + extra motion ----- */
+    .reveal{opacity:0;transform:translateY(50px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-left{opacity:0;transform:translateX(-60px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+    .reveal-left.visible{opacity:1;transform:translateX(0)}
+    .reveal-right{opacity:0;transform:translateX(60px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+    .reveal-right.visible{opacity:1;transform:translateX(0)}
+    .reveal-scale{opacity:0;transform:scale(.9);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+    .reveal-scale.visible{opacity:1;transform:scale(1)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+    /* ----- ABOUT ----- */
+    .about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:start}
+    .about-text p{font-size:1rem;line-height:1.9;margin-bottom:1.2rem}
+    .about-text p strong{color:var(--cream);font-weight:500}
+    .drop-cap{font-family:'Cormorant Garamond',serif;font-size:3.5rem;line-height:.8;color:var(--rose);float:left;margin:.4rem .8rem 0 0;animation:float 4s ease-in-out infinite}
+    .about-text .quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--rose);margin-top:1.5rem;padding-left:1.5rem;border-left:2px solid var(--rose)}
+    .about-cards{display:flex;flex-direction:column;gap:1rem}
+    .card{background:var(--bg-card);border:1px solid rgba(240,228,216,.1);border-radius:14px;padding:1.5rem;transition:.5s var(--ease)}
+    .card:hover{background:#2e1318;border-color:rgba(240,228,216,.25);transform:translateX(8px) scale(1.02);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+    .card i{color:var(--rose);font-size:1.2rem;margin-bottom:.8rem;display:block;transition:.5s}
+    .card:hover i{transform:scale(1.2) rotate(-8deg);color:var(--gold)}
+    .card h4{font-family:'Inter',sans-serif;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;font-weight:500;margin-bottom:.4rem}
+    .card p{font-size:.82rem;color:var(--cream-dim);margin:0}
+
+    /* ----- TIMELINE ----- */
+    .tl-item{display:grid;grid-template-columns:140px 1fr;gap:2rem;padding:1.6rem 0;border-bottom:1px solid rgba(240,228,216,.1);transition:.5s var(--ease)}
+    .tl-item:last-child{border-bottom:none}
+    .tl-item:hover{padding-left:1rem}
+    .tl-year{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--rose);transition:.4s}
+    .tl-item:hover .tl-year{color:var(--gold)}
+    .tl-content h4{font-family:'Inter',sans-serif;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;font-weight:500;margin-bottom:.5rem}
+    .tl-content p{font-size:.85rem;color:var(--cream-dim);margin:0}
+
+    /* ----- PROJECT CARDS ----- */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .proj{background:var(--bg-card);border:1px solid rgba(240,228,216,.1);border-radius:14px;overflow:hidden;transition:.6s var(--ease)}
+    .proj:hover{transform:translateY(-10px) scale(1.02);border-color:rgba(240,228,216,.25);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+    .proj-thumb{aspect-ratio:4/3;background:linear-gradient(135deg,#3a1218,#120608);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem}
+    .proj-thumb i{font-size:2.5rem;color:var(--rose);opacity:.75;margin-bottom:.8rem;transition:.6s}
+    .proj:hover .proj-thumb i{transform:scale(1.2);opacity:1;color:var(--gold)}
+    .proj-thumb .t{font-family:'Cormorant Garamond',serif;font-size:1.2rem}
+    .proj-thumb .s{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--cream-dim);margin-top:.4rem}
+    .proj-info{padding:1.2rem;border-top:1px solid rgba(240,228,216,.1)}
+    .proj-info .n{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cream-dim);display:block;margin-bottom:.5rem}
+    .proj-info h4{font-size:1.1rem;margin-bottom:.5rem}
+    .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
+    .tags span{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .6rem;border:1px solid rgba(240,228,216,.1);border-radius:30px;color:var(--cream-dim);transition:.4s}
+    .tags span:hover{border-color:var(--rose);color:var(--rose)}
+
+    /* ----- MARQUEE (enhanced) ----- */
+    .marquee{padding:2rem 0;overflow:hidden;border-top:1px solid rgba(240,228,216,.1);border-bottom:1px solid rgba(240,228,216,.1);background:var(--bg-deep)}
+    .marquee-track{display:flex;gap:3rem;animation:scroll 25s linear infinite;white-space:nowrap}
+    .marquee-track span{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream-dim);display:flex;align-items:center;gap:3rem}
+    .marquee-track i{color:var(--rose);font-size:.8rem;animation:spinSlow 6s linear infinite}
+    @keyframes scroll{to{transform:translateX(-50%)}}
+    @keyframes spinSlow{to{transform:rotate(360deg)}}
+
+    /* ----- CTA (enhanced) ----- */
+    .cta{background:var(--bg-deep);border-top:1px solid rgba(240,228,216,.1);border-bottom:1px solid rgba(240,228,216,.1);padding:5rem 0;text-align:center;position:relative;overflow:hidden}
+    .cta::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:600px;background:radial-gradient(circle,rgba(122,42,53,.3),transparent 70%);transform:translate(-50%,-50%);animation:pulse-glow 5s ease-in-out infinite}
+    @keyframes pulse-glow{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
+    .cta h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:.5rem;position:relative}
+    .cta h2 em{font-family:'Great Vibes',cursive;font-style:normal;color:var(--rose);font-size:1.4em;display:block}
+    .cta p{margin:1rem auto 2rem;font-size:.9rem;color:var(--cream-dim);position:relative}
+    .cta-btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--wine);color:var(--cream);padding:.9rem 2rem;border-radius:40px;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;border:none;cursor:none;font-family:'Inter',sans-serif;transition:.4s}
+    .cta-btn:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(122,42,53,.5)}
+
+    /* ----- FOOTER (animated) ----- */
+    footer{padding:2.5rem 0;text-align:center;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--cream-dim);border-top:1px solid rgba(240,228,216,.1)}
+    footer .script{font-family:'Great Vibes',cursive;font-size:1.8rem;color:var(--rose);letter-spacing:0;text-transform:none;display:block;margin-bottom:.8rem;animation:softPulse 4s infinite}
+    @keyframes softPulse{0%,100%{opacity:.9;transform:scale(1)}50%{opacity:1;transform:scale(1.02)}}
+
+    /* ----- EXTRA FLOATING GLOW (new) ----- */
+    .glow-orb{position:fixed;width:300px;height:300px;background:radial-gradient(circle,rgba(201,138,138,.12),transparent 70%);border-radius:50%;pointer-events:none;z-index:1;top:20%;left:10%;filter:blur(40px);animation:orbFloat 18s infinite alternate ease-in-out}
+    .glow-orb.two{width:400px;height:400px;top:60%;left:70%;background:radial-gradient(circle,rgba(122,42,53,.18),transparent 70%);animation-duration:22s;animation-direction:alternate-reverse}
+    @keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(40px,-50px) scale(1.2)}}
+
+    /* ----- RESPONSIVE ----- */
+    @media(max-width:900px){
+      body{cursor:auto}.cursor-dot,.cursor-ring{display:none}
+      .hero-grid{grid-template-columns:1fr;text-align:center;gap:2rem}
+      .hero-left,.hero-right{text-align:center}
+      .hero-right p{margin-left:auto;margin-right:auto}
+      .hero-right .meta{align-items:center}
+      .portrait{order:-1}
+      .about-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .tl-item{grid-template-columns:1fr;gap:.5rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- extra floating orbs -->
+<div class="glow-orb"></div>
+<div class="glow-orb two"></div>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="container">
+  <div class="topbar">
+    <span><span class="dot"></span> UI/UX &amp; WEB DESIGNER</span>
+    <span>CREATIVE PORTFOLIO</span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-word" id="heroWord">PORTFOLIO</h1>
+    <div class="hero-grid">
+      <div class="hero-left reveal-left">
+        <h2>I design digital<br>experiences that<br>inspire &amp; connect
+          <em>Maral Kishmiryan</em>
+        </h2>
+        <div class="type-line" id="typeLine"></div>
+        <a href="#contact" class="hero-btn">Available for projects <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="portrait reveal-scale d1">
+        <div class="portrait-frame">
+          <img src="maral.jpeg" alt="Maral Kishmiryan">
+        </div>
+      </div>
+      <div class="hero-right reveal-right d2">
+        <p>I'm a Software Engineering graduate and UI/UX Designer crafting elegant, functional and user-centered digital experiences.</p>
+        <div class="meta">
+          <span><i class="fas fa-globe"></i> BASED IN ARMENIA</span>
+          <span><i class="fas fa-briefcase"></i> WORKING WORLDWIDE</span>
+        </div>
+        <div class="signature">Maral</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>DESIGN <i class="fas fa-circle"></i> CODE <i class="fas fa-circle"></i> TEST <i class="fas fa-circle"></i> CREATE <i class="fas fa-circle"></i> UI/UX <i class="fas fa-circle"></i> QA <i class="fas fa-circle"></i> </span>
+    <span>DESIGN <i class="fas fa-circle"></i> CODE <i class="fas fa-circle"></i> TEST <i class="fas fa-circle"></i> CREATE <i class="fas fa-circle"></i> UI/UX <i class="fas fa-circle"></i> QA <i class="fas fa-circle"></i> </span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="container">
+    <div class="head reveal"><h3>About Me</h3><span>More than one direction</span></div>
+    <div class="about-grid">
+      <div class="about-text reveal-left">
+        <p><span class="drop-cap">H</span>ello, I'm <strong>Maral Kishmiryan</strong>. I was born in 2004 in Armenia and graduated from the <strong>National Polytechnic University of Armenia</strong>, where I studied Software Engineering.</p>
+        <p>My professional journey has developed across technology, design, and quality assurance. I have experience working as a <strong>Manual QA specialist</strong> and as a <strong>UI/UX Designer</strong>, where I learned to combine logical thinking with creativity.</p>
+        <p>Today, I work in a <strong>car import company</strong>, creating banners and visual content for digital platforms. This experience has allowed me to develop my visual design skills while working in a fast-paced business environment.</p>
+        <p>I enjoy working with digital products, creating visual experiences, discovering how things work, and continuously learning new skills.</p>
+        <p class="quote">"For me, technology and creativity are different parts of the same process: understanding a problem, finding an idea, creating something, testing it, and making it better."</p>
+      </div>
+      <div class="about-cards">
+        <div class="card reveal-right"><i class="fas fa-graduation-cap"></i><h4>Engineering Foundation</h4><p>My Software Engineering education gave me a technical foundation and helped me understand how software is built.</p></div>
+        <div class="card reveal-right d1"><i class="fas fa-bug"></i><h4>QA Mindset</h4><p>Manual QA taught me to pay attention to details, analyze problems, and look at products from the user's perspective.</p></div>
+        <div class="card reveal-right d2"><i class="fas fa-paint-brush"></i><h4>Design Perspective</h4><p>UI/UX design gave me another way to solve problems — through visual thinking, structure, and simplicity.</p></div>
+        <div class="card reveal-right d3"><i class="fas fa-car"></i><h4>Digital Design in Action</h4><p>Today I combine these experiences with digital design and visual content creation for real business goals.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="container">
+    <div class="head reveal"><h3>My Journey</h3></div>
+    <div class="tl-item reveal"><div class="tl-year">2004</div><div class="tl-content"><h4>The Beginning</h4><p>Born in Armenia.</p></div></div>
+    <div class="tl-item reveal"><div class="tl-year">Foundation</div><div class="tl-content"><h4>Software Engineering</h4><p>Studied at the National Polytechnic University of Armenia, building a technical foundation in software and technology.</p></div></div>
+    <div class="tl-item reveal"><div class="tl-year">Design</div><div class="tl-content"><h4>UI/UX Design</h4><p>Developed experience in interfaces, visual hierarchy, user flows, wireframes, and prototypes.</p></div></div>
+    <div class="tl-item reveal"><div class="tl-year">Quality</div><div class="tl-content"><h4>Manual QA</h4><p>Learned to identify problems, create test cases, report bugs, and analyze product behavior.</p></div></div>
+    <div class="tl-item reveal"><div class="tl-year">Visual</div><div class="tl-content"><h4>Digital Design</h4><p>Created banners and visual content for digital platforms.</p></div></div>
+    <div class="tl-item reveal"><div class="tl-year">Today</div><div class="tl-content"><h4>Combining Everything</h4><p>Working in a car import company while continuing to grow in technology, design, QA, and digital products.</p></div></div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="head reveal"><h3>Selected Experience</h3><span>View all</span></div>
+    <div class="grid-3">
+      <div class="proj reveal">
+        <div class="proj-thumb"><i class="fas fa-bug"></i><div class="t">Manual QA</div><div class="s">Testing · Quality</div></div>
+        <div class="proj-info"><span class="n">01</span><h4>Manual QA</h4><p style="font-size:.82rem;color:var(--cream-dim)">Testing taught me to look twice. Functional, regression, exploratory testing, test cases, and bug reporting.</p>
+          <div class="tags"><span>Functional</span><span>Regression</span><span>SDLC</span></div></div>
+      </div>
+      <div class="proj reveal d1">
+        <div class="proj-thumb"><i class="fas fa-pencil-ruler"></i><div class="t">UI/UX Design</div><div class="s">Interface · Figma</div></div>
+        <div class="proj-info"><span class="n">02</span><h4>UI/UX Design</h4><p style="font-size:.82rem;color:var(--cream-dim)">Design taught me to think from the user's perspective. Clean interfaces, wireframes, prototypes, and user flows.</p>
+          <div class="tags"><span>Figma</span><span>Wireframing</span><span>Prototyping</span></div></div>
+      </div>
+      <div class="proj reveal d2">
+        <div class="proj-thumb"><i class="fas fa-image"></i><div class="t">Digital Design</div><div class="s">Banners · Visual</div></div>
+        <div class="proj-info"><span class="n">03</span><h4>Digital Design</h4><p style="font-size:.82rem;color:var(--cream-dim)">Creating banners and visual content for a car import company — combining creativity with practical business goals.</p>
+          <div class="tags"><span>Banner</span><span>Social Media</span><span>Canva</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <h2 class="reveal">Let's create<br>something <em>Amazing</em></h2>
+    <p class="reveal d1">Have an idea, project, or opportunity? I'd love to hear from you.</p>
+    <a href="https://www.instagram.com/mashhh_____/" target="_blank" rel="noopener noreferrer" class="cta-btn reveal d2">Message me on Instagram <i class="fab fa-instagram"></i></a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span class="script">Maral</span>
+    Keep learning. Keep creating. &copy; 2026 Maral Kishmiryan
+  </div>
+</footer>
+
+<script>
+  // ---------- PROGRESS BAR ----------
+  const bar=document.getElementById('progressBar');
+  window.addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'});
+
+  // ---------- CUSTOM CURSOR ----------
+  const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`});
+  (function anim(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`;requestAnimationFrame(anim)})();
+  document.querySelectorAll('a,button,.card,.proj,.tl-item,.head h3').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'))});
+
+  // ---------- HERO LETTERS ----------
+  const hw=document.getElementById('heroWord'),wt=hw.textContent;hw.textContent='';
+  [...wt].forEach((c,i)=>{const s=document.createElement('span');s.textContent=c;s.style.animationDelay=(i*.08)+'s';hw.appendChild(s)});
+
+  // ---------- TYPEWRITER ----------
+  const tl=document.getElementById('typeLine'),ph=['UI/UX Designer','Manual QA Specialist','Digital Designer','Software Engineer'];
+  let pi=0,ci=0,del=false;
+  (function type(){const cur=ph[pi];if(!del){tl.textContent=cur.substring(0,ci++);if(ci>cur.length){del=true;setTimeout(type,1500);return}}else{tl.textContent=cur.substring(0,ci--);if(ci<0){del=false;pi=(pi+1)%ph.length}}setTimeout(type,del?45:90)})();
+
+  // ---------- INTERSECTION OBSERVER (REVEAL) ----------
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.15});
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>io.observe(el));
+
+  // ---------- EXTRA: TILT EFFECT ON CARDS (new subtle animation) ----------
+  document.querySelectorAll('.card, .proj').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 18;
+      const rotateY = (centerX - x) / 18;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  // ---------- EXTRA: PULSE ON TIMELINE DOTS (invisible but adds charm) ----------
+  // (already handled by :hover on tl-item)
+
+  // ---------- EXTRA: FLOATING ORBS ANIMATION (already CSS)
+  // ---------- EXTRA: RANDOM SPARKLES ON HERO? (very subtle)
+  // We'll add a tiny sparkle effect to the hero word on hover
+  const heroWordEl = document.getElementById('heroWord');
+  heroWordEl.addEventListener('mouseenter', () => {
+    heroWordEl.style.transition = 'text-shadow 0.4s';
+    heroWordEl.style.textShadow = '0 0 120px rgba(201,138,138,0.9), 0 0 200px rgba(122,42,53,0.8)';
+  });
+  heroWordEl.addEventListener('mouseleave', () => {
+    heroWordEl.style.textShadow = '0 0 80px rgba(122,42,53,.5)';
+  });
+</script>
+</body>
+</html>
